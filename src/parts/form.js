@@ -10,8 +10,11 @@ function form () {
         tel = document.querySelectorAll('[type=tel]'),
         statusMessage = document.createElement('div'),
         input = document.getElementsByTagName('input');
+        contactFormInput = contactForm.getElementsByTagName('input');
 
-    statusMessage.classList.add('status');
+		    statusMessage.classList.add('status');
+		    contactForm[0].setAttribute('name', 'email');
+		    contactForm[1].setAttribute('name', 'phone');
 
     tel.forEach((item) =>{
         item.addEventListener('input', (event) =>{
@@ -25,7 +28,7 @@ function form () {
         event.addEventListener('submit', function(e){
           e.preventDefault();
             event.appendChild(statusMessage);
-            let formData = new FormData(form);
+            let formData = new FormData(event);
     
             function postData(data) {
               return new Promise(function(resolve, reject){
