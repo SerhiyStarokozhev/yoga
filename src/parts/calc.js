@@ -35,7 +35,7 @@ function calc () {
     restDays.addEventListener('change', function () {
         daysSum = +this.value;
         if(daysSum!=''){
-            total = (daysSum+personsSum)*4000;
+            total = daysSum*personsSum*4000*place.value;
         } else {
             total = 0;
         }
@@ -51,8 +51,7 @@ function calc () {
         if(restDays.value == '' || persons.value == '') {
             totalValue.textContent = 0;
         }else {
-            let a = total;
-            totalValue.textContent = a * this.options[this.selectedIndex].value;
+            totalValue.textContent = daysSum * personsSum * 4000 * this.value;
         }
     });
 
