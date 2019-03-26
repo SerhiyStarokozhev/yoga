@@ -1619,7 +1619,7 @@ function calc() {
     daysSum = +this.value;
 
     if (daysSum != '') {
-      total = (daysSum + personsSum) * 4000;
+      total = daysSum * personsSum * 4000 * place.value;
     } else {
       total = 0;
     }
@@ -1634,8 +1634,7 @@ function calc() {
     if (restDays.value == '' || persons.value == '') {
       totalValue.textContent = 0;
     } else {
-      var a = total;
-      totalValue.textContent = a * this.options[this.selectedIndex].value;
+      totalValue.textContent = daysSum * personsSum * 4000 * this.value;
     }
   });
 
@@ -1674,7 +1673,10 @@ function form() {
       tel = document.querySelectorAll('[type=tel]'),
       statusMessage = document.createElement('div'),
       input = document.getElementsByTagName('input');
+  contactFormInput = contactForm.getElementsByTagName('input');
   statusMessage.classList.add('status');
+  contactForm[0].setAttribute('name', 'email');
+  contactForm[1].setAttribute('name', 'phone');
   tel.forEach(function (item) {
     item.addEventListener('input', function (event) {
       if (!event.target.value.match("^[ 0-9\+]+$")) {
@@ -1687,7 +1689,7 @@ function form() {
     event.addEventListener('submit', function (e) {
       e.preventDefault();
       event.appendChild(statusMessage);
-      var formData = new FormData(form);
+      var formData = new FormData(event);
 
       function postData(data) {
         return new Promise(function (resolve, reject) {
